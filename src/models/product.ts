@@ -10,9 +10,7 @@ export default class Product {
                 .insert(product);
             return await this.get(product.code);
         } catch (err: any) {
-            const error = new Error(`No se pudo agregar el producto: ${err.message}`);
-            error.name = "CantAddProduct";
-            throw error;
+
         }
     }
     
@@ -23,14 +21,12 @@ export default class Product {
                 .first();
 
             if (!product) {
-                throw new Error('Producto no encontrado');
+                return;
             }
 
             return await productSchema.parseAsync(product);
         } catch (err: any) {
-            const error = new Error(`Error al obtener el producto: ${err.message}`);
-            error.name = 'GetProductError';
-            throw error;
+
         }
     }
 
@@ -41,14 +37,12 @@ export default class Product {
                 .update(product);
 
             if (updatedCount === 0) {
-                throw new Error('Producto no encontrado para actualizar');
+                return;
             }
 
             return await this.get(product.code);
         } catch (err: any) {
-            const error = new Error(`No se pudo actualizar el producto: ${err.message}`);
-            error.name = 'UpdateProductError';
-            throw error;
+
         }
     }
 
@@ -59,14 +53,12 @@ export default class Product {
                 .del();
 
             if (deletedCount === 0) {
-                throw new Error('Producto no encontrado para eliminar');
+                return;
             }
 
             return deletedCount;
         } catch (err: any) {
-            const error = new Error(`No se pudo eliminar el producto: ${err.message}`);
-            error.name = 'DeleteProductError';
-            throw error;
+
         }
     }
 
@@ -75,9 +67,7 @@ export default class Product {
             const products = await db<ProductType>(TABLE_NAME).select();
             return await productSchema.array().parseAsync(products);
         } catch (err: any) {
-            const error = new Error(`Error al obtener los productos: ${err.message}`);
-            error.name = 'GetAllProductsError';
-            throw error;
+
         }
     }
 }

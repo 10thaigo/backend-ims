@@ -9,11 +9,7 @@ export default class ProductController {
             const addedProduct = await Models.product.add(parsed);
             return res.status(201).json(addedProduct);
         } catch (error: any) {
-            if (error.name) {
-                return res.status(400).json({ error: error.message });
-            }
 
-            return res.status(500).json('Internal server error');
         }
     }
 
@@ -25,11 +21,6 @@ export default class ProductController {
             return res.status(200).json(product);
         } catch (error: any) {
 
-            if (error.name) {
-                return res.status(404).json({ error: error.message });
-            }
-
-            return res.status(500).json('Internal server error');
         }
     }
 
@@ -38,11 +29,7 @@ export default class ProductController {
             const products = await Models.product.getAll();
             return res.status(200).json(products);
         } catch (error: any) {
-            if(error.name) {
-                return res.status(404).json({ error: error.message });
-            }
 
-            return res.status(500).json('Internal server error');
         }
     }
 
@@ -53,11 +40,7 @@ export default class ProductController {
             await Models.product.del(code);
             return res.status(200).json({ message: 'Producto eliminado' });
         } catch (error: any) {
-            if(error.name){
-                return res.status(404).json({ error: error.message });
-            }
 
-            return res.status(500).json('Internal server error');
         }
     }
 
@@ -67,10 +50,7 @@ export default class ProductController {
             await Models.product.update(parsed);
             return res.status(200).json({ message: 'Producto actualizado' });
         } catch (error: any) {
-            if (error.name) {
-                return res.status(400).json({ error: error.message });
-            }
-            return res.status(500).json('Internal server error');
+
         }
     }
 }

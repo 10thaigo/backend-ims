@@ -29,13 +29,13 @@ export default class AuthController {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'strict',
-                maxAge: 3600*1000
+                maxAge: 360000*1000
             });
 
             return res.json({ message: 'Logeado correctamente' });
 
         } catch (error) {
-            return res.status(500).json({ error: 'Internal server error' });
+
         }
     }
 }
